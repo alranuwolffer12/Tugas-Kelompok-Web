@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quest - Mini Game Edukasi Coding</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- HEADER UTAMA -->
+        <header>
+            <div class="game-title">
+                <span>&lt;/&gt;</span> CODE QUEST
+            </div>
+            <div class="subtitle">Mini Game Edukasi Coding untuk Pemula</div>
+        </header>
+
+        <!-- ==========================================================================
+             SCREEN 1: BERANDA / PILIH KATEGORI
+             ========================================================================== -->
+        <div id="home-screen" class="screen active">
+            <p style="text-align: center; color: var(--text-secondary);">Pilih kategori soal yang ingin kamu pelajari:</p>
+
+            <div class="category-grid">
+                <div class="category-card" onclick="selectCategory('python')">
+                    <div class="category-icon">🐍</div>
+                    <div class="category-name">Python</div>
+                    <div class="category-desc">10 Soal Dasar Logic &amp; Syntax</div>
+                </div>
+
+                <div class="category-card" onclick="selectCategory('html')">
+                    <div class="category-icon">🌐</div>
+                    <div class="category-name">HTML</div>
+                    <div class="category-desc">10 Soal Tag &amp; Elemen Web</div>
+                </div>
+
+                <div class="category-card" onclick="selectCategory('css')">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-name">CSS</div>
+                    <div class="category-desc">10 Soal Styling &amp; Layout</div>
+                </div>
+
+                <div class="category-card" onclick="selectCategory('javascript')">
+                    <div class="category-icon">⚡</div>
+                    <div class="category-name">JavaScript</div>
+                    <div class="category-desc">10 Soal Variable &amp; DOM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             SCREEN 2: HALAMAN SOAL (QUIZ)
+             ========================================================================== -->
+        <div id="quiz-screen" class="screen">
+            <!-- Header Quiz & Progress -->
+            <div class="quiz-header">
+                <span id="category-badge" class="category-badge">PYTHON</span>
+                <span id="question-number" class="question-number">Question 1 / 10</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar-container">
+                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+            </div>
+
+            <!-- Pertanyaan & Kode -->
+            <div id="question-text" class="question-text">Teks pertanyaan akan tampil di sini?</div>
+            <div id="code-box" class="code-box">print("Hello World")</div>
+
+            <!-- Pilihan Jawaban (diisi otomatis oleh JavaScript) -->
+            <div id="options-list" class="options-list"></div>
+
+            <!-- Penjelasan (ditampilkan setelah tombol Periksa ditekan) -->
+            <div id="feedback-box" class="feedback-box">
+                <div id="feedback-title" class="feedback-title">✓ Correct!</div>
+                <div id="feedback-text">Penjelasan jawaban akan muncul di sini.</div>
+            </div>
+
+            <!-- Tombol Aksi -->
+            <button id="action-btn" class="btn-primary" onclick="handleActionButton()" disabled>Periksa Jawaban</button>
+        </div>
+
+        <!-- ==========================================================================
+             SCREEN 3: HASIL AKHIR (RESULT)
+             ========================================================================== -->
+        <div id="result-screen" class="screen">
+            <div class="result-container">
+                <div class="result-title">GAME COMPLETE! 🏆</div>
+                <p style="color: var(--text-secondary);">Berikut adalah hasil kuis kamu:</p>
+
+                <div id="score-badge" class="score-badge">80 / 100</div>
+
+                <div class="stats-grid">
+                    <div class="stat-card correct-card">
+                        <div id="stat-correct" class="stat-value" style="color: var(--success);">8</div>
+                        <div class="stat-label">Jawaban Benar</div>
+                    </div>
+                    <div class="stat-card wrong-card">
+                        <div id="stat-wrong" class="stat-value" style="color: var(--error);">2</div>
+                        <div class="stat-label">Jawaban Salah</div>
+                    </div>
+                </div>
+
+                <button class="btn-primary" onclick="restartGame()">Play Again (Pilih Kategori)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Urutan pemuatan penting: data -> utilitas -> logika game -->
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/game.js"></script>
+</body>
+</html>
