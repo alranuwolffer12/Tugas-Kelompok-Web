@@ -1,58 +1,66 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Code Quest - Mini Game Edukasi Coding</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
     <div class="app-container">
         <!-- HEADER UTAMA -->
         <header>
             <div class="game-title">
-                <span>&lt;/&gt;</span> CODE QUEST
+                <span onclick="unlockEasterEgg()">&lt;/&gt;</span> CODE QUEST
             </div>
             <div class="subtitle">Mini Game Edukasi Coding untuk Pemula</div>
         </header>
 
-        <!-- ==========================================================================
-             SCREEN 1: BERANDA / PILIH KATEGORI
-             ========================================================================== -->
+        <!-- SCREEN 1: BERANDA / PILIH KATEGORI -->
         <div id="home-screen" class="screen active">
-            <p style="text-align: center; color: var(--text-secondary);">Pilih kategori soal yang ingin kamu pelajari:</p>
+            <p style="text-align: center; color: var(--text-secondary);">Pilih kategori soal yang ingin kamu pelajari:
+            </p>
 
             <div class="category-grid">
                 <div class="category-card" onclick="selectCategory('python')">
-                    <div class="category-icon">🐍</div>
+                    <div class="category-icon"><i class="fa-brands fa-python"></i></div>
                     <div class="category-name">Python</div>
                     <div class="category-desc">10 Soal Dasar Logic &amp; Syntax</div>
                 </div>
 
                 <div class="category-card" onclick="selectCategory('html')">
-                    <div class="category-icon">🌐</div>
+                    <div class="category-icon"><i class="fa-brands fa-html5"></i></div>
                     <div class="category-name">HTML</div>
                     <div class="category-desc">10 Soal Tag &amp; Elemen Web</div>
                 </div>
 
                 <div class="category-card" onclick="selectCategory('css')">
-                    <div class="category-icon">🎨</div>
+                    <div class="category-icon"><i class="fa-brands fa-css"></i></div>
                     <div class="category-name">CSS</div>
                     <div class="category-desc">10 Soal Styling &amp; Layout</div>
                 </div>
 
                 <div class="category-card" onclick="selectCategory('javascript')">
-                    <div class="category-icon">⚡</div>
+                    <div class="category-icon"><i class="fa-brands fa-js"></i></div>
                     <div class="category-name">JavaScript</div>
                     <div class="category-desc">10 Soal Variable &amp; DOM</div>
+                </div>
+
+                <div id="secret-category" class="category-card secret-card" onclick="selectCategory('meme')">
+                    <div class="category-icon"><i class="fa-solid fa-masks-theater"></i></div>
+                    <div class="category-name">Meme Indo</div>
+                    <div class="category-desc">10 tebak teks meme random</div>
                 </div>
             </div>
         </div>
 
-        <!-- ==========================================================================
-             SCREEN 2: HALAMAN SOAL (QUIZ)
-             ========================================================================== -->
+        <!-- SCREEN 2: HALAMAN SOAL (QUIZ) -->
         <div id="quiz-screen" class="screen">
             <!-- Header Quiz & Progress -->
             <div class="quiz-header">
@@ -68,6 +76,7 @@
             <!-- Pertanyaan & Kode -->
             <div id="question-text" class="question-text">Teks pertanyaan akan tampil di sini?</div>
             <div id="code-box" class="code-box">print("Hello World")</div>
+            <div id="image-box" class="image-box"><img id="question-image" src="" alt="Gambar soal"></div>
 
             <!-- Pilihan Jawaban (diisi otomatis oleh JavaScript) -->
             <div id="options-list" class="options-list"></div>
@@ -82,12 +91,10 @@
             <button id="action-btn" class="btn-primary" onclick="handleActionButton()" disabled>Periksa Jawaban</button>
         </div>
 
-        <!-- ==========================================================================
-             SCREEN 3: HASIL AKHIR (RESULT)
-             ========================================================================== -->
+        <!-- SCREEN 3: HASIL AKHIR (RESULT) -->
         <div id="result-screen" class="screen">
             <div class="result-container">
-                <div class="result-title">GAME COMPLETE! 🏆</div>
+                <div class="result-title">GAME COMPLETE! <i class="fa-solid fa-trophy"></i></div>
                 <p style="color: var(--text-secondary);">Berikut adalah hasil kuis kamu:</p>
 
                 <div id="score-badge" class="score-badge">80 / 100</div>
@@ -112,5 +119,8 @@
     <script src="assets/js/data.js"></script>
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/game.js"></script>
+    <script src="assets/js/meme.js"></script>
+    <script src="assets/image/meme/memeJumatan.jpg"></script>
 </body>
+
 </html>

@@ -311,5 +311,98 @@ const questionsDatabase = {
             answer: 1,
             explanation: "Salah! Java dan JavaScript adalah dua bahasa yang sama sekali berbeda dengan konsep dan kegunaan yang berbeda."
         }
+    ],
+    meme: [
+        {
+            question: "Gambar meme di atas merupakan template meme?",
+            code: null,
+            image: "assets/image/meme/memeJumatan.jpg",
+            imageAlt: "Gambar meme",
+            options: ["minguan", "sabtuan", "Jumatan", "Tauran"],
+            answer: 2,
+            explanation: "..."
+        },
+        {
+            question: "Kode redem AMSSRBLHGSHARKMM berasal dari stremer",
+            code: null,
+            image: null,
+            imageAlt: null,
+            options: ["Windah", "Bang Regi", "Lutfi", "Reza Auditore"],
+            answer: 3,
+            explanation: "..."
+        },
+        {
+            question: "apa nama dari meme tersebut",
+            code: null,
+            image: "assets/image/meme/meme sahur.jpg",
+            imageAlt: "gambar meme",
+            options: ["din dun", "tung tung sahur", "pakci", "Reza Auditore"],
+            answer: 1,
+            explanation: "..."
+        },
+        {
+            question: "apa nama dari meme tersebut",
+            code: null,
+            image: "assets/image/meme/meme jeruk.jpg",
+            imageAlt: "gambar meme",
+            options: ["din dun", "tung tung sahur", "pakci", "bahlil"],
+            answer: 0,
+            explanation: "..."
+        },
+        {
+            question: "siapakah nama pria di dalam gambar tersebut ?",
+            code: null,
+            image: "assets/image/meme/bahlil.jpg",
+            imageAlt: "gambar meme",
+            options: ["din dun", "tung tung sahur", "skibidi", "bahlil"],
+            answer: 3,
+            explanation: "..."
+        },
+        {
+            question: "pria tersebut di juluki raja meme siapakah dia ?",
+            code: null,
+            image: "assets/image/meme/weilino.jpg",
+            imageAlt: "gambar meme",
+            options: ["Reza Auditore", "tung tung sahur", "weilino", "windah"],
+            answer: 2,
+            explanation: "..."
+        },
+        {
+            question: "pria tersebut di juluki raja kripto siapakah dia ?",
+            code: null,
+            image: "assets/image/meme/timoty.jpg",
+            imageAlt: "gambar meme",
+            options: ["Ishow speed", "Timoty Ronald", "Timoty ronaldo", "Ronald"],
+            answer: 1,
+            explanation: "..."
+        },
+        {
+            question: "teks dari meme ini apa ?",
+            code: null,
+            image: "assets/image/meme/meme verifikasi.jpg",
+            imageAlt: "gambar meme",
+            options: ["verifikasi sigma", "verifikasi berhasil", "verifikasi 6767", "verivikasi berasil"],
+            answer: 1,
+            explanation: "..."
+        },
+        {
+            question: "apa isi komentar dari gambar ini sehingga menjadi drama tentang rokok di fesnuk di tahun 2024",
+            code: null,
+            image: "assets/image/meme/herta.jpg",
+            imageAlt: "gambar meme",
+            options: ["Gw kok benci sama perokok ya", "aku benci perokok", "perokok hama", "sdm rendah perokok"],
+            answer: 0,
+            explanation: "..."
+        },
+        {
+            question: "teks dari meme ini apa ?",
+            code: null,
+            image: "assets/image/meme/dibisukan.jpg",
+            imageAlt: "gambar meme",
+            options: ["dibisukan", "didiamkan", "disuarakan", "disesuaikan"],
+            answer: 0,
+            explanation: "..."
+        }
+
     ]
 };

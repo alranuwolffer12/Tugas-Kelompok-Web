@@ -1,25 +1,17 @@
-/* ==========================================================================
-   LOGIKA GAME (STATE + FUNGSI UTAMA)
-   ==========================================================================
-   Bergantung pada:
-   - questionsDatabase  (js/data.js)
-   - showScreen, escapeHTML (js/utils.js)
+/* 
+   LOGIKA GAME (STATE + FUNGSI UTAMA)   
 */
 
-/* --------------------------------------------------------------------------
-   STATE MANAGEMENT (VARIABEL GAME)
-   -------------------------------------------------------------------------- */
-let currentCategory = "";       // Kategori aktif (python/html/css/javascript)
-let currentQuestionIndex = 0;   // Indeks soal saat ini
-let score = 0;                  // Total skor pemain
-let correctCount = 0;           // Jumlah jawaban benar
-let wrongCount = 0;             // Jumlah jawaban salah
-let selectedOptionIndex = null; // Indeks jawaban yang dipilih pemain
-let isAnswerChecked = false;    // Status apakah soal sudah di-check
+/* STATE MANAGEMENT (VARIABEL GAME) */
+let currentCategory = "";
+let currentQuestionIndex = 0;
+let score = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let selectedOptionIndex = null;
+let isAnswerChecked = false;
 
-/* --------------------------------------------------------------------------
-   GAME FUNCTIONS
-   -------------------------------------------------------------------------- */
+/* GAME FUNCTIONS */
 
 // 1. Memulai Game berdasarkan kategori yang dipilih
 function selectCategory(categoryKey) {
@@ -29,35 +21,27 @@ function selectCategory(categoryKey) {
     correctCount = 0;
     wrongCount = 0;
 
-    // Update nama badge kategori
     document.getElementById("category-badge").textContent = categoryKey.toUpperCase();
 
-    // Pindah dari Home Screen ke Quiz Screen
     showScreen("quiz-screen");
 
-    // Tampilkan soal pertama
     showQuestion();
 }
-
 // 2. Menampilkan Soal dan Pilihan Jawaban
 function showQuestion() {
-    // Reset state untuk soal baru
     selectedOptionIndex = null;
     isAnswerChecked = false;
 
     const questionsList = questionsDatabase[currentCategory];
     const currentQ = questionsList[currentQuestionIndex];
 
-    // Update Progress Bar & Nomor Soal
     const totalQ = questionsList.length;
     document.getElementById("question-number").textContent = `Question ${currentQuestionIndex + 1} / ${totalQ}`;
     const progressPercent = ((currentQuestionIndex + 1) / totalQ) * 100;
     document.getElementById("progress-bar-fill").style.width = `${progressPercent}%`;
 
-    // Tampilkan Teks Pertanyaan
     document.getElementById("question-text").textContent = currentQ.question;
 
-    // Tampilkan Kode jika ada, atau sembunyikan jika null
     const codeBox = document.getElementById("code-box");
     if (currentQ.code) {
         codeBox.textContent = currentQ.code;
@@ -66,9 +50,21 @@ function showQuestion() {
         codeBox.style.display = "none";
     }
 
-    // Render Pilihan Jawaban (Options)
+    const imageBox = document.getElementById("image-box");
+    const imageEl = document.getElementById("question-image");
+    if (currentQ.image) {
+        imageEl.src = currentQ.image;
+        imageEl.alt = currentQ.imageAlt || "Gambar soal";
+        imageEl.onerror = () => { imageBox.style.display = "none"; };
+        imageBox.style.display = "block";
+    } else {
+        imageBox.style.display = "none";
+        imageEl.removeAttribute("src");
+    }
+
+
     const optionsListContainer = document.getElementById("options-list");
-    optionsListContainer.innerHTML = ""; // Bersihkan pilihan sebelumnya
+    optionsListContainer.innerHTML = "";
 
     const prefixes = ["A", "B", "C", "D"];
     currentQ.options.forEach((optionText, index) => {
@@ -83,25 +79,22 @@ function showQuestion() {
         optionsListContainer.appendChild(btn);
     });
 
-    // Sembunyikan Feedback Box
     const feedbackBox = document.getElementById("feedback-box");
     feedbackBox.className = "feedback-box";
     feedbackBox.style.display = "none";
 
-    // Reset Tombol Aksi (Check Answer / Next)
     const actionBtn = document.getElementById("action-btn");
     actionBtn.textContent = "Periksa Jawaban";
-    actionBtn.disabled = true; // Disable sampai pemain memilih jawaban
+    actionBtn.disabled = true;
 }
 
 // 3. Memilih Pilihan Jawaban
 function selectOption(index) {
-    if (isAnswerChecked) return; // Jika sudah dicek, abaikan klik
+    if (isAnswerChecked) return;
 
     selectedOptionIndex = index;
     const buttons = document.querySelectorAll(".option-btn");
 
-    // Hilangkan class 'selected' dari semua tombol, lalu tambahkan ke yang dipilih
     buttons.forEach((btn, i) => {
         if (i === index) {
             btn.classList.add("selected");
@@ -110,7 +103,6 @@ function selectOption(index) {
         }
     });
 
-    // Aktifkan tombol 'Periksa Jawaban'
     document.getElementById("action-btn").disabled = false;
 }
 
@@ -132,12 +124,9 @@ function checkAnswer() {
     const feedbackTitle = document.getElementById("feedback-title");
     const feedbackText = document.getElementById("feedback-text");
 
-    // Nonaktifkan semua pilihan jawaban agar tidak bisa diganti
     buttons.forEach(btn => btn.style.pointerEvents = "none");
 
-    // Cek apakah jawaban pemain benar
     if (selectedOptionIndex === currentQ.answer) {
-        // Jawaban Benar
         score += 10;
         correctCount++;
 
@@ -148,7 +137,6 @@ function checkAnswer() {
         feedbackTitle.textContent = "✓ Correct! (+10 Points)";
         feedbackText.innerHTML = `<strong>Penjelasan:</strong> ${currentQ.explanation}`;
     } else {
-        // Jawaban Salah
         wrongCount++;
 
         if (selectedOptionIndex !== null) {
@@ -156,7 +144,6 @@ function checkAnswer() {
             buttons[selectedOptionIndex].classList.add("wrong-style");
         }
 
-        // Beri warna hijau pada jawaban yang seharusnya benar
         buttons[currentQ.answer].classList.add("correct-style");
 
         feedbackBox.className = "feedback-box wrong";
@@ -167,10 +154,8 @@ function checkAnswer() {
         `;
     }
 
-    // Tampilkan Feedback Box
     feedbackBox.style.display = "block";
 
-    // Ubah tombol menjadi 'Next Question'
     const actionBtn = document.getElementById("action-btn");
     const totalQ = questionsDatabase[currentCategory].length;
 
@@ -210,25 +195,3 @@ function finishGame() {
 function restartGame() {
     showScreen("home-screen");
 }
-
-/* ==========================================================================
-   PANDUAN PENGEMBANGAN MASA DEPAN (FOR JUNIOR DEVELOPERS / V2 & V3)
-   ==========================================================================
-   1. ACAK SOAL (Randomize Questions) [V2]:
-      Gunakan algoritma Fisher-Yates Shuffle pada array soal saat selectCategory():
-      function shuffle(array) {
-          return array.sort(() => Math.random() - 0.5);
-      }
-
-   2. TAMBAH TIMER / WAKTU [V2]:
-      Gunakan setInterval() di showQuestion() untuk menghitung mundur 15 detik per soal.
-      let timeLeft = 15;
-      let timer = setInterval(() => {
-          timeLeft--;
-          if (timeLeft <= 0) { clearInterval(timer); checkAnswer(); }
-      }, 1000);
-
-   3. SIMPAN SKOR KE LOCALSTORAGE [V4]:
-      Gunakan window.localStorage untuk menyimpan High Score:
-      localStorage.setItem('highScore_python', score);
-*/
